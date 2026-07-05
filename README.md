@@ -1,6 +1,6 @@
 # apk-utils
 
-A collection of tools and checklist for android bug hunting
+A collection of tools and checklist for android bug hunting.
 
 ## Requirements
 
