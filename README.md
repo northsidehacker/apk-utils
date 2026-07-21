@@ -10,7 +10,6 @@ A collection of tools and checklists for Android bug hunting.
     ├── docs/
     │   └── pull-base-apk.md
     ├── README.md
-    └── LICENSE
 
 ## Scripts
 

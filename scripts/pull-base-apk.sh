@@ -8,9 +8,15 @@ else
     ADB="adb"
 fi
 
+# check device is connected
+if ! $ADB get-state >/dev/null 2>&1; then
+    echo "Error: no device connected via adb" >&2
+    exit 1
+fi
+
 search_package() {
     read -p 'Search for package: ' PKG
-    RESULTS=$($ADB shell 'pm list packages' | sed 's/.*://' | sort | grep "$PKG")
+    RESULTS=$($ADB shell 'pm list packages' | sed 's/.*://' | sort | grep -F "$PKG")
     if [ -z "$RESULTS" ]; then
         RESULTS_COUNT=0
     else
@@ -42,3 +48,15 @@ mkdir -p "$DEST"
 "$ADB" pull "$BASE_APK_PATH" "$DEST/"
 
 echo "Saved to: $DEST/base.apk"
+# --- signature verification ---
+if command -v apksigner >/dev/null 2>&1; then
+    echo ""
+    echo "Verifying signature..."
+    apksigner verify --print-certs "$DEST/base.apk" || {
+        echo "Warning: apksigner verification failed for $DEST/base.apk" >&2
+    }
+else
+    echo ""
+    echo "Note: apksigner not found on PATH, skipping signature verification."
+    echo "Install Android SDK build-tools to enable this check."
+fi
