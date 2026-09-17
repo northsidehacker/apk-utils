@@ -12,8 +12,8 @@ Search for an installed package by name and pull only its `base.apk` via ADB. Op
 ## Usage
 
 ```
-chmod +x scripts/pull-base-apk.sh
-./scripts/pull-base-apk.sh
+chmod +x pull-base-apk.sh
+./pull-base-apk.sh
 ```
 
 You'll be prompted to:
@@ -27,16 +27,16 @@ If `apksigner` is available on your `PATH`, the script automatically verifies th
 ## Example
 
 ```
-$ ./scripts/pull-base-apk.sh
+$ ./pull-base-apk.sh
 
 Search for package: chrome
 com.android.chrome
 
 1 results
 
-Save location [default: current directory]: ./apks
+Save location [default: current directory]: apks
 
-Saved to: ./apks/base.apk
+Saved to: apks/base.apk
 
 Verifying signature...
 Signer #1 certificate DN: ...
